@@ -1,0 +1,29 @@
+name: Setup SQL Server Database
+
+on: 
+  workflow_dispatch
+
+jobs:
+  Deploy-Development:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Development
+        uses: ./.github/workflows/deploy-sql.yml
+        with:
+          sql_server: ${{ secrets.SQL_SERVER }}
+          sql_user: ${{ secrets.SQL_USER }}
+          sql_password: ${{ secrets.SQL_PASSWORD }}
+          sql_script: DatabaseAdministration/DBAutomation/sql_setup.sql
+
+  Deploy-Production:
+    needs: Deploy-Development  # Ensures this runs only after Deploy-Development completes
+    environment: Approval-AP   # Adds approval requirement for production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Production
+        uses: ./.github/workflows/deploy-sql.yml
+        with:
+          sql_server: ${{ secrets.AP_SQL_SERVER }}
+          sql_user: ${{ secrets.AP_SQL_USER }}
+          sql_password: ${{ secrets.AP_SQL_PASSWORD }}
+          sql_script: DatabaseAdministration/DBAutomation/sql_setup.sql
