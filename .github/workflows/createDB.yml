@@ -12,7 +12,7 @@ jobs:
           sql_server: ${{ secrets.SQL_SERVER }}
           sql_user: ${{ secrets.SQL_USER }}
           sql_password: ${{ secrets.SQL_PASSWORD }}
-          sql_script: sql_setup.sql
+          sql_script: SQLScripts/sql_setup.sql
 
   Deploy-Production:
     needs: Deploy-Development  # Ensures this runs only after Deploy-Development completes
@@ -25,4 +25,4 @@ jobs:
           sql_server: ${{ secrets.AP_SQL_SERVER }}
           sql_user: ${{ secrets.AP_SQL_USER }}
           sql_password: ${{ secrets.AP_SQL_PASSWORD }}
-          sql_script: sql_setup.sql
+          sql_script: SQLScripts/sql_setup.sql
