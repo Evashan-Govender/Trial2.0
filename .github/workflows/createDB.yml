@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to Development
-        uses: ./.github/workflows/deploy-sql.yml
+        uses: ./.github/workflows/createDBTemplate.yml
         with:
           sql_server: ${{ secrets.SQL_SERVER }}
           sql_user: ${{ secrets.SQL_USER }}
@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to Production
-        uses: ./.github/workflows/deploy-sql.yml
+        uses: ./.github/workflows/createDBTemplate.yml
         with:
           sql_server: ${{ secrets.AP_SQL_SERVER }}
           sql_user: ${{ secrets.AP_SQL_USER }}
